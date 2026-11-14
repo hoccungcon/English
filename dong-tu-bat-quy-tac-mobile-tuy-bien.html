@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Động Từ Bất Quy Tắc - Học Cùng Con</title>
+    <style>
+        :root {
+            --primary: #1a73e8;
+            --primary-dark: #1557b0;
+            --primary-light: #e8f0fe;
+            --accent: #ff6d00;
+            --bg: #f0f4f9;
+            --card-bg: #ffffff;
+            --text: #1f2937;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --success: #16a34a;
+            --error: #dc2626;
+            --base-font: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            font-size: var(--base-font);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.5;
+            padding-bottom: 40px;
+        }
+
+        /* Top Brand Banner */
+        .brand-bar {
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            color: #ffffff;
+            padding: 10px 16px;
+            font-size: 0.875rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-bar a {
+            color: #ffeb3b;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 12px;
+        }
+
+        /* Header */
+        header {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px 16px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 12px;
+        }
+
+        header h1 {
+            margin: 0 0 6px 0;
+            font-size: 1.35rem;
+            color: var(--primary-dark);
+        }
+
+        header p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Mobile Quick Settings Panel */
+        .settings-panel {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 12px 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .settings-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .setting-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .setting-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        select, .btn-pill {
+            padding: 7px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            background: #f8fafc;
+            color: var(--text);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            min-height: 36px;
+        }
+
+        .btn-pill.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .btn-test-audio {
+            background: #fef3c7;
+            border-color: #f59e0b;
+            color: #92400e;
+        }
+
+        .in-app-notice {
+            display: none;
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            color: #92400e;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        /* Sticky Navigation Tabs */
+        .tabs-wrapper {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: var(--bg);
+            padding: 6px 0 10px 0;
+        }
+
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #dce6f2;
+            padding: 4px;
+            border-radius: 12px;
+            gap: 4px;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            padding: 11px 10px;
+            border-radius: 9px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #4b5563;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tab-btn.active {
+            background: var(--card-bg);
+            color: var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Search & Filter Bar */
+        .search-area {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .search-input-wrap {
+            position: relative;
+            flex: 1;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 38px 12px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--card-bg);
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary);
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e5e7eb;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            font-size: 14px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .view-toggle-btn {
+            background: var(--card-bg);
+            border: 1.5px solid var(--border);
+            border-radius: 12px;
+            padding: 0 12px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .stats-bar {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Mobile Card View (Default on Mobile) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 680px) {
+            .cards-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .verb-card {
+            background: var(--card-bg);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 8px;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .card-meaning {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+        }
+
+        .btn-chain {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-chain:active {
+            transform: scale(0.96);
+        }
+
+        .forms-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .form-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 8px 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .form-box:active {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .form-tag {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+
+        .form-word {
+            display: block;
+            font-weight: 700;
+            font-size: 0.98rem;
+            color: var(--text);
+            word-break: break-word;
+        }
+
+        .form-ipa {
+            display: block;
+            font-size: 0.78rem;
+            color: #4b5563;
+            margin-top: 2px;
+        }
+
+        /* Compact Table View */
+        .table-container {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 14px;
+            overflow-x: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 560px;
+        }
+
+        th, td {
+            padding: 11px 10px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        th {
+            background: var(--primary);
+            color: #fff;
+            position: sticky;
+            top: 0;
+        }
+
+        .speak-inline {
+            background: var(--primary-light);
+            border: none;
+            color: var(--primary-dark);
+            border-radius: 6px;
+            padding: 4px 7px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Practice Section */
+        .practice-box {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 18px 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .score-badge {
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        .q-card {
+            background: #f8fafc;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 14px;
+        }
+
+        .q-meaning {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 6px;
+        }
+
+        .q-v1 {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+        }
+
+        .action-btns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 14px;
+        }
+
+        .btn-main {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-check {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-next {
+            background: #e2e8f0;
+            color: var(--text);
+        }
+
+        .feedback {
+            margin-top: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .feedback.ok {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+
+        .feedback.err {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 24px;
+            padding: 16px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        footer a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            box-shadow: 0 4px 12px rgba(26,115,232,0.4);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 90;
+        }
+    </style>
+</head>
+<body>
+
+<div class="brand-bar">
+    <span>© Kênh: <strong>Học Cùng Con</strong></span>
+    <span>📞 Zalo/ĐT: <a href="tel:0585734211">0585734211</a></span>
+</div>
+
+<div class="container">
+    <header>
+        <h1>Bảng Động Từ Bất Quy Tắc</h1>
+        <p>Chạm vào từng từ để nghe phát âm bản xứ • Phiên âm IPA & Nghĩa tiếng Việt</p>
+    </header>
+
+    <div id="inAppNotice" class="in-app-notice">
+        ⚠️ Bạn đang mở bằng trình duyệt trong ứng dụng (Facebook/Zalo). Nếu không nghe thấy tiếng, hãy bấm dấu <strong>⋮</strong> hoặc <strong>⋯</strong> ở góc màn hình và chọn <strong>"Mở bằng trình duyệt" (Safari / Chrome)</strong>.
+    </div>
+
+    <!-- Thanh tùy biến hiển thị & giọng đọc cho điện thoại -->
+    <div class="settings-panel">
+        <div class="settings-row">
+            <div class="setting-group">
+                <span class="setting-label">Cỡ chữ:</span>
+                <button class="btn-pill" onclick="setFontSize('14px', this)">Nhỏ</button>
+                <button class="btn-pill active" onclick="setFontSize('16px', this)">Vừa</button>
+                <button class="btn-pill" onclick="setFontSize('18.5px', this)">Lớn</button>
+            </div>
+            <button class="btn-pill btn-test-audio" onclick="testAudio()">🔊 Thử loa</button>
+        </div>
+
+        <div class="settings-row">
+            <div class="setting-group">
+                <span class="setting-label">Giọng:</span>
+                <select id="accentSelect">
+                    <option value="en-US">Anh - Mỹ (US)</option>
+                    <option value="en-GB">Anh - Anh (UK)</option>
+                </select>
+                <select id="rateSelect">
+                    <option value="0.7">Chậm (0.7x)</option>
+                    <option value="0.95" selected>Chuẩn (1.0x)</option>
+                    <option value="1.15">Nhanh (1.15x)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thanh chuyển Tab cố định khi cuộn -->
+    <div class="tabs-wrapper">
+        <div class="tabs">
+            <button class="tab-btn active" id="btnTabLookup" onclick="switchTab('lookup')">📖 Bảng Tra Cứu</button>
+            <button class="tab-btn" id="btnTabPractice" onclick="switchTab('practice')">✍ Luyện Tập</button>
+        </div>
+    </div>
+
+    <!-- TAB 1: TRA CỨU -->
+    <div id="lookup" class="tab-content active">
+        <div class="search-area">
+            <div class="search-input-wrap">
+                <input type="text" id="searchInput" class="search-box" placeholder="Tìm từ tiếng Anh hoặc nghĩa Việt..." oninput="handleSearch()">
+                <button id="clearSearchBtn" class="clear-btn" onclick="clearSearch()">✕</button>
+            </div>
+            <button class="view-toggle-btn" id="viewToggleBtn" onclick="toggleViewMode()">☰ Dạng Bảng</button>
+        </div>
+
+        <div class="stats-bar">
+            <span id="verbCount">Hiển thị: 60 động từ thông dụng</span>
+            <span>💡 Chạm vào ô từ để nghe</span>
+        </div>
+
+        <!-- Chế độ Thẻ (Tối ưu điện thoại) -->
+        <div id="cardsContainer" class="cards-grid"></div>
+
+        <!-- Chế độ Bảng truyền thống -->
+        <div id="tableContainer" class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>V1 (Nguyên mẫu)</th>
+                        <th>V2 (Quá khứ)</th>
+                        <th>V3 (Phân từ)</th>
+                        <th>Nghĩa tiếng Việt</th>
+                        <th>Nghe</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TAB 2: LUYỆN TẬP -->
+    <div id="practice" class="tab-content">
+        <div class="practice-box">
+            <div class="score-badge" id="scoreBadge">Điểm của bé: 0 / 0 câu</div>
+
+            <div class="q-card">
+                <div class="q-meaning" id="qMeaning">Nghĩa: ...</div>
+                <div class="q-v1">
+                    <span><strong>V1:</strong> <span id="qV1">...</span> <span id="qIpa" style="color:#4b5563;font-size:0.9rem;">...</span></span>
+                    <button class="btn-chain" onclick="speakWord(currentVerb.v1)">🔊 Nghe V1</button>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="ansV2">Nhập V2 (Quá khứ đơn):</label>
+                <input type="text" id="ansV2" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Gõ dạng quá khứ đơn...">
+            </div>
+
+            <div class="input-group">
+                <label for="ansV3">Nhập V3 (Quá khứ phân từ):</label>
+                <input type="text" id="ansV3" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Gõ dạng quá khứ phân từ...">
+            </div>
+
+            <div class="action-btns">
+                <button class="btn-main btn-check" onclick="checkPractice()">✔ Kiểm tra</button>
+                <button class="btn-main btn-next" onclick="nextPractice()">Câu tiếp ➔</button>
+            </div>
+
+            <div id="practiceFeedback" class="feedback"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    Tài liệu biên soạn miễn phí bởi Fanpage <a href="https://www.facebook.com/profile.php?id=61596260322060" target="_blank">Học Cùng Con</a><br>
+    Hỗ trợ & Tư vấn học tập: <strong>0585734211</strong>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+
+<script>
+    const verbs = [
+        { v1: "be", ipa1: "/biː/", v2: "was / were", ipa2: "/wɒz - wɜː/", v3: "been", ipa3: "/biːn/", vi: "thì, là, ở" },
+        { v1: "become", ipa1: "/bɪˈkʌm/", v2: "became", ipa2: "/bɪˈkeɪm/", v3: "become", ipa3: "/bɪˈkʌm/", vi: "trở thành, trở nên" },
+        { v1: "begin", ipa1: "/bɪˈɡɪn/", v2: "began", ipa2: "/bɪˈɡæn/", v3: "begun", ipa3: "/bɪˈɡʌn/", vi: "bắt đầu" },
+        { v1: "bite", ipa1: "/baɪt/", v2: "bit", ipa2: "/bɪt/", v3: "bitten", ipa3: "/ˈbɪtn/", vi: "cắn" },
+        { v1: "blow", ipa1: "/bləʊ/", v2: "blew", ipa2: "/bluː/", v3: "blown", ipa3: "/bləʊn/", vi: "thổi" },
+        { v1: "break", ipa1: "/breɪk/", v2: "broke", ipa2: "/brəʊk/", v3: "broken", ipa3: "/ˈbrəʊkən/", vi: "làm vỡ, gãy" },
+        { v1: "bring", ipa1: "/brɪŋ/", v2: "brought", ipa2: "/brɔːt/", v3: "brought", ipa3: "/brɔːt/", vi: "mang đến" },
+        { v1: "build", ipa1: "/bɪld/", v2: "built", ipa2: "/bɪlt/", v3: "built", ipa3: "/bɪlt/", vi: "xây dựng" },
+        { v1: "buy", ipa1: "/baɪ/", v2: "bought", ipa2: "/bɔːt/", v3: "bought", ipa3: "/bɔːt/", vi: "mua" },
+        { v1: "catch", ipa1: "/kætʃ/", v2: "caught", ipa2: "/kɔːt/", v3: "caught", ipa3: "/kɔːt/", vi: "bắt, chụp lấy" },
+        { v1: "choose", ipa1: "/tʃuːz/", v2: "chose", ipa2: "/tʃəʊz/", v3: "chosen", ipa3: "/ˈtʃəʊzn/", vi: "chọn lựa" },
+        { v1: "come", ipa1: "/kʌm/", v2: "came", ipa2: "/keɪm/", v3: "come", ipa3: "/kʌm/", vi: "đến, đi đến" },
+        { v1: "cost", ipa1: "/kɒst/", v2: "cost", ipa2: "/kɒst/", v3: "cost", ipa3: "/kɒst/", vi: "trị giá" },
+        { v1: "cut", ipa1: "/kʌt/", v2: "cut", ipa2: "/kʌt/", v3: "cut", ipa3: "/kʌt/", vi: "cắt" },
+        { v1: "do", ipa1: "/duː/", v2: "did", ipa2: "/dɪd/", v3: "done", ipa3: "/dʌn/", vi: "làm" },
+        { v1: "draw", ipa1: "/drɔː/", v2: "drew", ipa2: "/druː/", v3: "drawn", ipa3: "/drɔːn/", vi: "vẽ, kéo" },
+        { v1: "drink", ipa1: "/drɪŋk/", v2: "drank", ipa2: "/dræŋk/", v3: "drunk", ipa3: "/drʌŋk/", vi: "uống" },
+        { v1: "drive", ipa1: "/draɪv/", v2: "drove", ipa2: "/drəʊv/", v3: "driven", ipa3: "/ˈdrɪvn/", vi: "lái xe" },
+        { v1: "eat", ipa1: "/iːt/", v2: "ate", ipa2: "/et/", v3: "eaten", ipa3: "/ˈiːtn/", vi: "ăn" },
+        { v1: "fall", ipa1: "/fɔːl/", v2: "fell", ipa2: "/fel/", v3: "fallen", ipa3: "/ˈfɔːlən/", vi: "ngã, rơi" },
+        { v1: "feed", ipa1: "/fiːd/", v2: "fed", ipa2: "/fed/", v3: "fed", ipa3: "/fed/", vi: "cho ăn" },
+        { v1: "feel", ipa1: "/fiːl/", v2: "felt", ipa2: "/felt/", v3: "felt", ipa3: "/felt/", vi: "cảm thấy" },
+        { v1: "fight", ipa1: "/faɪt/", v2: "fought", ipa2: "/fɔːt/", v3: "fought", ipa3: "/fɔːt/", vi: "chiến đấu" },
+        { v1: "find", ipa1: "/faɪnd/", v2: "found", ipa2: "/faʊnd/", v3: "found", ipa3: "/faʊnd/", vi: "tìm thấy" },
+        { v1: "fly", ipa1: "/flaɪ/", v2: "flew", ipa2: "/fluː/", v3: "flown", ipa3: "/fləʊn/", vi: "bay" },
+        { v1: "forget", ipa1: "/fəˈɡet/", v2: "forgot", ipa2: "/fəˈɡɒt/", v3: "forgotten", ipa3: "/fəˈɡɒtn/", vi: "quên" },
+        { v1: "get", ipa1: "/ɡet/", v2: "got", ipa2: "/ɡɒt/", v3: "got / gotten", ipa3: "/ɡɒt/", vi: "nhận được, lấy" },
+        { v1: "give", ipa1: "/ɡɪv/", v2: "gave", ipa2: "/ɡeɪv/", v3: "given", ipa3: "/ˈɡɪvn/", vi: "cho, tặng" },
+        { v1: "go", ipa1: "/ɡəʊ/", v2: "went", ipa2: "/went/", v3: "gone", ipa3: "/ɡɒn/", vi: "đi" },
+        { v1: "grow", ipa1: "/ɡrəʊ/", v2: "grew", ipa2: "/ɡruː/", v3: "grown", ipa3: "/ɡrəʊn/", vi: "mọc, trồng, lớn lên" },
+        { v1: "have", ipa1: "/hæv/", v2: "had", ipa2: "/hæd/", v3: "had", ipa3: "/hæd/", vi: "có" },
+        { v1: "hear", ipa1: "/hɪə/", v2: "heard", ipa2: "/hɜːd/", v3: "heard", ipa3: "/hɜːd/", vi: "nghe" },
+        { v1: "hide", ipa1: "/haɪd/", v2: "hid", ipa2: "/hɪd/", v3: "hidden", ipa3: "/ˈhɪdn/", vi: "trốn, giấu" },
+        { v1: "hit", ipa1: "/hɪt/", v2: "hit", ipa2: "/hɪt/", v3: "hit", ipa3: "/hɪt/", vi: "đánh, đụng" },
+        { v1: "hold", ipa1: "/həʊld/", v2: "held", ipa2: "/held/", v3: "held", ipa3: "/held/", vi: "cầm, nắm giữ" },
+        { v1: "keep", ipa1: "/kiːp/", v2: "kept", ipa2: "/kept/", v3: "kept", ipa3: "/kept/", vi: "giữ" },
+        { v1: "know", ipa1: "/nəʊ/", v2: "knew", ipa2: "/njuː/", v3: "known", ipa3: "/nəʊn/", vi: "biết" },
+        { v1: "leave", ipa1: "/liːv/", v2: "left", ipa2: "/left/", v3: "left", ipa3: "/left/", vi: "rời đi, để lại" },
+        { v1: "lend", ipa1: "/lend/", v2: "lent", ipa2: "/lent/", v3: "lent", ipa3: "/lent/", vi: "cho mượn" },
+        { v1: "lose", ipa1: "/luːz/", v2: "lost", ipa2: "/lɒst/", v3: "lost", ipa3: "/lɒst/", vi: "đánh mất, thua" },
+        { v1: "make", ipa1: "/meɪk/", v2: "made", ipa2: "/meɪd/", v3: "made", ipa3: "/meɪd/", vi: "làm, chế tạo" },
+        { v1: "meet", ipa1: "/miːt/", v2: "met", ipa2: "/met/", v3: "met", ipa3: "/met/", vi: "gặp gỡ" },
+        { v1: "pay", ipa1: "/peɪ/", v2: "paid", ipa2: "/peɪd/", v3: "paid", ipa3: "/peɪd/", vi: "trả tiền" },
+        { v1: "put", ipa1: "/pʊt/", v2: "put", ipa2: "/pʊt/", v3: "put", ipa3: "/pʊt/", vi: "đặt, để" },
+        { v1: "read", ipa1: "/riːd/", v2: "read", ipa2: "/red/", v3: "read", ipa3: "/red/", vi: "đọc" },
+        { v1: "ride", ipa1: "/raɪd/", v2: "rode", ipa2: "/rəʊd/", v3: "ridden", ipa3: "/ˈrɪdn/", vi: "cưỡi, đạp xe" },
+        { v1: "run", ipa1: "/rʌn/", v2: "ran", ipa2: "/ræn/", v3: "run", ipa3: "/rʌn/", vi: "chạy" },
+        { v1: "say", ipa1: "/seɪ/", v2: "said", ipa2: "/sed/", v3: "said", ipa3: "/sed/", vi: "nói" },
+        { v1: "see", ipa1: "/siː/", v2: "saw", ipa2: "/sɔː/", v3: "seen", ipa3: "/siːn/", vi: "nhìn thấy" },
+        { v1: "sell", ipa1: "/sel/", v2: "sold", ipa2: "/səʊld/", v3: "sold", ipa3: "/səʊld/", vi: "bán" },
+        { v1: "send", ipa1: "/send/", v2: "sent", ipa2: "/sent/", v3: "sent", ipa3: "/sent/", vi: "gửi" },
+        { v1: "sing", ipa1: "/sɪŋ/", v2: "sang", ipa2: "/sæŋ/", v3: "sung", ipa3: "/sʌŋ/", vi: "hát" },
+        { v1: "sit", ipa1: "/sɪt/", v2: "sat", ipa2: "/sæt/", v3: "sat", ipa3: "/sæt/", vi: "ngồi" },
+        { v1: "sleep", ipa1: "/sliːp/", v2: "slept", ipa2: "/slept/", v3: "slept", ipa3: "/slept/", vi: "ngủ" },
+        { v1: "speak", ipa1: "/spiːk/", v2: "spoke", ipa2: "/spəʊk/", v3: "spoken", ipa3: "/ˈspəʊkən/", vi: "nói (ngôn ngữ)" },
+        { v1: "swim", ipa1: "/swɪm/", v2: "swam", ipa2: "/swæm/", v3: "swum", ipa3: "/swʌm/", vi: "bơi lội" },
+        { v1: "take", ipa1: "/teɪk/", v2: "took", ipa2: "/tʊk/", v3: "taken", ipa3: "/ˈteɪkən/", vi: "cầm, lấy, đưa" },
+        { v1: "teach", ipa1: "/tiːtʃ/", v2: "taught", ipa2: "/tɔːt/", v3: "taught", ipa3: "/tɔːt/", vi: "dạy học" },
+        { v1: "tell", ipa1: "/tel/", v2: "told", ipa2: "/təʊld/", v3: "told", ipa3: "/təʊld/", vi: "kể, bảo" },
+        { v1: "write", ipa1: "/raɪt/", v2: "wrote", ipa2: "/rəʊt/", v3: "written", ipa3: "/ˈrɪtn/", vi: "viết" }
+    ];
+
+    let isCardView = true;
+    let currentUtterance = null;
+    let chainTimers = [];
+    let audioUnlocked = false;
+
+    // Detect In-App Browser (Facebook / Zalo)
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    if (/FBAN|FBAV|Zalo/i.test(ua)) {
+        document.getElementById('inAppNotice').style.display = 'block';
+    }
+
+    // Unlock audio on first touch for iOS/Android
+    function unlockMobileAudio() {
+        if (audioUnlocked) return;
+        if ('speechSynthesis' in window) {
+            const silent = new SpeechSynthesisUtterance('');
+            silent.volume = 0;
+            window.speechSynthesis.speak(silent);
+        }
+        audioUnlocked = true;
+    }
+    document.addEventListener('touchstart', unlockMobileAudio, { once: true });
+    document.addEventListener('click', unlockMobileAudio, { once: true });
+
+    function getBestVoice(lang) {
+        if (!('speechSynthesis' in window)) return null;
+        const voices = window.speechSynthesis.getVoices();
+        return voices.find(v => v.lang === lang && (v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Daniel') || v.name.includes('Natural')))
+            || voices.find(v => v.lang === lang)
+            || voices.find(v => v.lang.startsWith('en'));
+    }
+
+    if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => window.speechSynthesis.getVoices();
+    }
+
+    function stopAllSpeech() {
+        chainTimers.forEach(t => clearTimeout(t));
+        chainTimers = [];
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+        }
+    }
+
+    function speakWord(rawText) {
+        stopAllSpeech();
+        const cleanText = rawText.replace(/\//g, ', ');
+        const lang = document.getElementById('accentSelect').value;
+        const rate = parseFloat(document.getElementById('rateSelect').value);
+
+        if ('speechSynthesis' in window) {
+            currentUtterance = new SpeechSynthesisUtterance(cleanText);
+            currentUtterance.lang = lang;
+            currentUtterance.rate = rate;
+            const voice = getBestVoice(lang);
+            if (voice) currentUtterance.voice = voice;
+            window.speechSynthesis.speak(currentUtterance);
+        }
+    }
+
+    function speakChain(v1, v2, v3) {
+        stopAllSpeech();
+        const list = [v1, v2, v3];
+        list.forEach((word, index) => {
+            const timer = setTimeout(() => {
+                const cleanText = word.replace(/\//g, ', ');
+                const lang = document.getElementById('accentSelect').value;
+                const rate = parseFloat(document.getElementById('rateSelect').value);
+                if ('speechSynthesis' in window) {
+                    currentUtterance = new SpeechSynthesisUtterance(cleanText);
+                    currentUtterance.lang = lang;
+                    currentUtterance.rate = rate;
+                    const voice = getBestVoice(lang);
+                    if (voice) currentUtterance.voice = voice;
+                    window.speechSynthesis.speak(currentUtterance);
+                }
+            }, index * 1150);
+            chainTimers.push(timer);
+        });
+    }
+
+    function testAudio() {
+        speakWord("Hello! Welcome to Học Cùng Con");
+    }
+
+    // Font Size Customizer
+    function setFontSize(size, btn) {
+        document.documentElement.style.setProperty('--base-font', size);
+        document.querySelectorAll('.settings-row .btn-pill:not(.btn-test-audio)').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+
+    // Toggle Card vs Table View
+    function toggleViewMode() {
+        isCardView = !isCardView;
+        const cardsEl = document.getElementById('cardsContainer');
+        const tableEl = document.getElementById('tableContainer');
+        const toggleBtn = document.getElementById('viewToggleBtn');
+
+        if (isCardView) {
+            cardsEl.style.display = 'grid';
+            tableEl.style.display = 'none';
+            toggleBtn.textContent = '☰ Dạng Bảng';
+        } else {
+            cardsEl.style.display = 'none';
+            tableEl.style.display = 'block';
+            toggleBtn.textContent = '🗂 Dạng Thẻ';
+        }
+    }
+
+    // Render Verbs
+    function renderVerbs(data) {
+        const cardsContainer = document.getElementById('cardsContainer');
+        const tableBody = document.getElementById('tableBody');
+        cardsContainer.innerHTML = '';
+        tableBody.innerHTML = '';
+
+        document.getElementById('verbCount').textContent = `Hiển thị: ${data.length} động từ`;
+
+        data.forEach(item => {
+            // Card Item
+            const card = document.createElement('div');
+            card.className = 'verb-card';
+            card.innerHTML = `
+                <div class="card-header">
+                    <div class="card-meaning">${item.vi}</div>
+                    <button class="btn-chain" onclick="speakChain('${item.v1}', '${item.v2}', '${item.v3}')">🔊 Nghe cả 3</button>
+                </div>
+                <div class="forms-row">
+                    <div class="form-box" onclick="speakWord('${item.v1}')">
+                        <span class="form-tag">V1 • Nguyên mẫu</span>
+                        <span class="form-word">${item.v1} 🔈</span>
+                        <span class="form-ipa">${item.ipa1}</span>
+                    </div>
+                    <div class="form-box" onclick="speakWord('${item.v2}')">
+                        <span class="form-tag">V2 • Quá khứ</span>
+                        <span class="form-word">${item.v2} 🔈</span>
+                        <span class="form-ipa">${item.ipa2}</span>
+                    </div>
+                    <div class="form-box" onclick="speakWord('${item.v3}')">
+                        <span class="form-tag">V3 • Phân từ</span>
+                        <span class="form-word">${item.v3} 🔈</span>
+                        <span class="form-ipa">${item.ipa3}</span>
+                    </div>
+                </div>
+            `;
+            cardsContainer.appendChild(card);
+
+            // Table Row
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td><button class="speak-inline" onclick="speakWord('${item.v1}')">🔊 ${item.v1}</button><br><small style="color:#6b7280">${item.ipa1}</small></td>
+                <td><button class="speak-inline" onclick="speakWord('${item.v2}')">🔊 ${item.v2}</button><br><small style="color:#6b7280">${item.ipa2}</small></td>
+                <td><button class="speak-inline" onclick="speakWord('${item.v3}')">🔊 ${item.v3}</button><br><small style="color:#6b7280">${item.ipa3}</small></td>
+                <td><strong>${item.vi}</strong></td>
+                <td><button class="btn-chain" onclick="speakChain('${item.v1}', '${item.v2}', '${item.v3}')">▶ Chuỗi</button></td>
+            `;
+            tableBody.appendChild(tr);
+        });
+    }
+
+    function handleSearch() {
+        const input = document.getElementById('searchInput');
+        const clearBtn = document.getElementById('clearSearchBtn');
+        const q = input.value.trim().toLowerCase();
+
+        clearBtn.style.display = q.length > 0 ? 'flex' : 'none';
+
+        const filtered = verbs.filter(v =>
+            v.v1.toLowerCase().includes(q) ||
+            v.v2.toLowerCase().includes(q) ||
+            v.v3.toLowerCase().includes(q) ||
+            v.vi.toLowerCase().includes(q)
+        );
+        renderVerbs(filtered);
+    }
+
+    function clearSearch() {
+        document.getElementById('searchInput').value = '';
+        handleSearch();
+    }
+
+    // Tab Switching
+    function switchTab(tab) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        if (tab === 'lookup') {
+            document.getElementById('btnTabLookup').classList.add('active');
+            document.getElementById('lookup').classList.add('active');
+        } else {
+            document.getElementById('btnTabPractice').classList.add('active');
+            document.getElementById('practice').classList.add('active');
+            if (!currentVerb) nextPractice();
+        }
+    }
+
+    // Practice Logic
+    let currentVerb = null;
+    let totalAnswered = 0;
+    let correctCount = 0;
+    let answeredCurrent = false;
+
+    function nextPractice() {
+        const idx = Math.floor(Math.random() * verbs.length);
+        currentVerb = verbs[idx];
+        answeredCurrent = false;
+
+        document.getElementById('qMeaning').textContent = `Nghĩa: ${currentVerb.vi}`;
+        document.getElementById('qV1').textContent = currentVerb.v1;
+        document.getElementById('qIpa').textContent = currentVerb.ipa1;
+        document.getElementById('ansV2').value = '';
+        document.getElementById('ansV3').value = '';
+
+        const fb = document.getElementById('practiceFeedback');
+        fb.className = 'feedback';
+        fb.textContent = '';
+    }
+
+    function checkAnswerPart(userVal, correctVal) {
+        if (!userVal) return false;
+        const options = correctVal.toLowerCase().split('/').map(s => s.trim());
+        return options.includes(userVal) || userVal === correctVal.toLowerCase();
+    }
+
+    function checkPractice() {
+        const u2 = document.getElementById('ansV2').value.trim().toLowerCase();
+        const u3 = document.getElementById('ansV3').value.trim().toLowerCase();
+        const fb = document.getElementById('practiceFeedback');
+
+        const ok2 = checkAnswerPart(u2, currentVerb.v2);
+        const ok3 = checkAnswerPart(u3, currentVerb.v3);
+
+        if (!answeredCurrent) {
+            totalAnswered++;
+            if (ok2 && ok3) correctCount++;
+            answeredCurrent = true;
+            document.getElementById('scoreBadge').textContent = `Điểm của bé: ${correctCount} / ${totalAnswered} câu`;
+        }
+
+        if (ok2 && ok3) {
+            fb.className = 'feedback ok';
+            fb.innerHTML = `🎉 Chính xác tuyệt đối! <strong>${currentVerb.v1} – ${currentVerb.v2} – ${currentVerb.v3}</strong>`;
+        } else {
+            fb.className = 'feedback err';
+            fb.innerHTML = `❌ Chưa đúng rồi! Đáp án chuẩn là:<br>V2: <strong>${currentVerb.v2}</strong> • V3: <strong>${currentVerb.v3}</strong>`;
+        }
+
+        speakChain(currentVerb.v1, currentVerb.v2, currentVerb.v3);
+    }
+
+    // Scroll to top button
+    window.addEventListener('scroll', () => {
+        const btn = document.getElementById('scrollTopBtn');
+        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
+    });
+
+    // Init
+    renderVerbs(verbs);
+</script>
+
+</body>
+</html>
